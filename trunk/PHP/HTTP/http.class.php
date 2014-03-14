@@ -79,7 +79,8 @@ class H_HTTP {
 	
 	protected function socket($method, $path = '/', $postdata = '', $headers = '')
 	{
-		$fp = fsockopen($this->HOST, $this->PORT, $errno, $errstr, 10);
+		$scheme = ($this->PORT==443)?'ssl://':'';
+		$fp = fsockopen($scheme.$this->HOST, $this->PORT, $errno, $errstr, 10);
 		if(!empty($fp)){
 			$this->REQUEST_HEADERS	=	"$method $path HTTP/1.1".CRLF.
 						'Host: '.$this->HOST.CRLF;
